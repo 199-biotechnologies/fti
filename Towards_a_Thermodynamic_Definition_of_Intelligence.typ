@@ -143,7 +143,7 @@ Consider a minimal control task. A binary latent variable $z in {0,1}$ determine
 
 The first agent learns the latent rule: its internal representation is $M = z$, compressing the two-bit observation to the one bit that matters. The second memorises all four observation--action pairs, storing $M = (z, n)$. The third memorises only the nuisance bit, setting $M = n$.
 
-Because each agent faces a fresh i.i.d.\ draw with no prior episode history, $H_t = emptyset$ and the general form $C_u = I(M_t; Z_(t+tau)^V | H_t)$ reduces to $C_u = I(M; Z)$. We compute this exactly by constructing the joint distribution $P(M, Z)$ for each agent, where $Z = z$ is the viability-relevant variable. Because $z$ and $n$ are independent and uniform, the joint distributions are:
+Because each agent faces a fresh i.i.d.\ draw with no prior episode history, $H_t = emptyset$ and the general form $C_u = I(M_t; Z_(t+tau)^V | H_t)$ reduces to $C_u = I(M; Z)$. This special case demonstrates the _compression_ aspect of useful structure --- the ability to extract $Z$ from a noisy observation --- but does not exercise the _predictive_ aspect that the conditioning on $H_t$ captures in sequential settings. We compute $C_u$ exactly by constructing the joint distribution $P(M, Z)$ for each agent, where $Z = z$ is the viability-relevant variable. Because $z$ and $n$ are independent and uniform, the joint distributions are:
 
 - *Rule learner:* $P(M{=}i, Z{=}j) = 1/2$ if $i = j$, else $0$. This gives $I(M; Z) = H(Z) = 1$ bit.
 - *Lookup table:* $P(M{=}(i,k), Z{=}j) = 1/4$ if $i = j$, else $0$. Again $I(M; Z) = 1$ bit, but $H(M) = 2$ bits --- one bit of nuisance is stored without increasing useful structure.
