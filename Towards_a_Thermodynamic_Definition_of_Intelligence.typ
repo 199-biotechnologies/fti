@@ -176,7 +176,7 @@ Three comparative tests are central.
 
 == Test 1: usefulness-filtered structure should outpredict size-based proxies
 
-Within a fixed task family and hardware class, estimates of $C_u$ should predict held-out adaptation, transfer, and robustness better than raw parameter count, raw energy use, or raw learned bits. In machine learning, this can be tested by training multiple architectures on the same hardware, measuring wall-plug or board-level energy, estimating $C_u$ with a task-relative proxy, and then testing out-of-distribution adaptation.
+Within a fixed task family and hardware class, estimates of $C_u$ should predict held-out adaptation, transfer, and robustness better than raw parameter count, raw energy use, or raw learned bits. A purely reactive controller may achieve viability within a narrow niche, but it will score low on adaptive reach across the environment distribution $mu$; the framework captures this through the separation of $A$ from $C_u$. In machine learning, this test can be conducted by training multiple architectures on the same hardware, measuring wall-plug or board-level energy, estimating $C_u$ with a task-relative proxy, and then testing out-of-distribution adaptation.
 
 == Test 2: nuisance memory should raise raw information but not intelligence
 
