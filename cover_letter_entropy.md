@@ -23,4 +23,4 @@ Thank you for your consideration.
 
 Boris Djordjevic
 199 Biotechnologies (SG) Pte Ltd
-boris@199biotechnologies.com
+boris@paperfoot.com
