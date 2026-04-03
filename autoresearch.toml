@@ -1,8 +1,8 @@
 [experiment]
 target_file = "eval_metric.py"
 eval_command = "python3 eval_metric.py 2>/tmp/autoresearch_debug.txt"
-metric = "ratio"
-direction = "maximize"
+metric_name = "ratio"
+metric_direction = "maximize"
 time_budget = "300"
 
 [metadata]
