@@ -8,7 +8,9 @@ This paper proposes that a thermodynamic definition of intelligence requires a u
 
 The paper sits squarely within Entropy's scope at the intersection of non-equilibrium thermodynamics, information theory, and complex adaptive systems. It is positioned relative to work published or circulated in the past eighteen months and addresses a question that the journal's readership is well placed to evaluate.
 
-I confirm that this manuscript has not been published elsewhere and is not under consideration at another journal.
+I confirm that this manuscript has not been published elsewhere and is not under consideration at another journal. All authors (sole author) have read and approved the submitted version of the manuscript.
+
+Note: If the "Perspective" article type is not available in the submission system for this section, please consider the manuscript as an Article. Suggested reviewers are listed below for reference; I will also enter them in the submission system as requested.
 
 Suggested reviewers with relevant expertise:
 

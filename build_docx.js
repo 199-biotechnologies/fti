@@ -377,7 +377,7 @@ const doc = new Document({
       p("This research received no external funding."),
       p(""),
       h2("Data Availability Statement"),
-      p("The computation code used to generate Table 1 is available at https://github.com/199-biotechnologies/fti (compute_cu.py)."),
+      p("The computation code used to generate Table 1 and the neural-network validation suite will be made publicly available at https://github.com/199-biotechnologies/fti upon publication. The scripts include compute_cu.py (exact toy calculation), neural_experiment.py (Level 2 experiment), validation_suite.py (7-agent cross-validation), and hypothesis_battery.py (40-hypothesis stress test)."),
       p(""),
       h2("Conflicts of Interest"),
       p("The author is the founder of 199 Biotechnologies (SG) Pte Ltd, which develops AI infrastructure tools. The research was conducted independently and the company had no role in the design or writing of this work."),
