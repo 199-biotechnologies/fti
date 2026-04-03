@@ -1,0 +1,157 @@
+======================================================================
+SECTION 1: EXACT FORMULA PROPERTIES
+======================================================================
+
+H1.1: C_u ≤ H(Z) for all agents (information-theoretic bound)
+  [PASS] H1.1a: p(z=0)=0.5, C_u=1.0000 ≤ H(Z)=1.0000
+  [PASS] H1.1a: p(z=0)=0.3, C_u=0.8813 ≤ H(Z)=0.8813
+  [PASS] H1.1a: p(z=0)=0.1, C_u=0.4690 ≤ H(Z)=0.4690
+  [PASS] H1.1a: p(z=0)=0.01, C_u=0.0808 ≤ H(Z)=0.0808
+
+H1.2: C_u = 0 when M is independent of Z
+  [PASS] H1.2: |M|=2, uniform P(M,Z), C_u=0.000000
+  [PASS] H1.2: |M|=4, uniform P(M,Z), C_u=0.000000
+  [PASS] H1.2: |M|=8, uniform P(M,Z), C_u=0.000000
+
+H1.3: C_u invariant to bijective relabeling of M
+  [PASS] H1.3: C_u(orig)=1.000000 vs C_u(permuted)=1.000000
+
+H1.4: Expanding M with noise doesn't increase C_u
+  [PASS] H1.4: M=(z,n1..n1), |M|=4, C_u=1.0000
+  [PASS] H1.4: M=(z,n1..n2), |M|=8, C_u=1.0000
+  [PASS] H1.4: M=(z,n1..n4), |M|=32, C_u=1.0000
+
+H1.5: C_u scales with H(Z) for skewed distributions
+  [PASS] H1.5: p(z=0)=0.5, H(Z)=1.0000, C_u=1.0000
+  [PASS] H1.5: p(z=0)=0.3, H(Z)=0.8813, C_u=0.8813
+  [PASS] H1.5: p(z=0)=0.1, H(Z)=0.4690, C_u=0.4690
+  [PASS] H1.5: p(z=0)=0.01, H(Z)=0.0808, C_u=0.0808
+  [PASS] H1.5: p(z=0)=0.001, H(Z)=0.0114, C_u=0.0114
+
+======================================================================
+SECTION 2: CORRELATED NOISE
+======================================================================
+
+H2.1: Correlated noise → noise memoriser gains useful info
+  [PASS] H2.1: rho=0.0, C_u(noise)=0.0000, C_u(rule)=1.0000
+  [PASS] H2.1: rho=0.3, C_u(noise)=0.0659, C_u(rule)=1.0000
+  [PASS] H2.1: rho=0.5, C_u(noise)=0.1887, C_u(rule)=1.0000
+  [PASS] H2.1: rho=0.8, C_u(noise)=0.5310, C_u(rule)=1.0000
+  [PASS] H2.1: rho=1.0, C_u(noise)=1.0000, C_u(rule)=1.0000
+
+H2.2: n = z → noise memoriser equivalent to rule learner
+  [PASS] H2.2: n=z, C_u(noise memoriser)=1.0000
+
+======================================================================
+SECTION 3: MULTI-CLASS VIABILITY
+======================================================================
+
+  [PASS] H3.1: K=2 classes, C_u(perfect)=1.0000, H(Z)=1.0000
+  [PASS] H3.1: K=4 classes, C_u(perfect)=2.0000, H(Z)=2.0000
+  [PASS] H3.1: K=8 classes, C_u(perfect)=3.0000, H(Z)=3.0000
+  [PASS] H3.1: K=16 classes, C_u(perfect)=4.0000, H(Z)=4.0000
+
+H3.2: Partial learner — captures subset of viability-relevant info
+  [PASS] H3.2: K=4, coarse learner, C_u=1.0000, H(Z)=2.0000
+
+======================================================================
+SECTION 4: NEURAL NETWORK SCALING
+======================================================================
+
+H4.1: C_u vs bottleneck dimension
+    bn_dim=  1: C_u=0.8270, acc=1.000
+    bn_dim=  2: C_u=0.9890, acc=1.000
+    bn_dim=  4: C_u=0.9799, acc=1.000
+    bn_dim=  8: C_u=0.9851, acc=1.000
+    bn_dim= 16: C_u=0.9871, acc=1.000
+    bn_dim= 32: C_u=0.9959, acc=1.000
+  [PASS] H4.1: C_u generally increases with bottleneck dim
+       Sequence: ['0.827', '0.989', '0.980', '0.985', '0.987', '0.996']
+
+H4.2: I_eff decreases with unnecessary model capacity
+    hidden=  8: C_u=0.9812, FLOPs=  80,640,000, I_eff=1.22e-08
+    hidden= 16: C_u=0.9890, FLOPs= 161,280,000, I_eff=6.13e-09
+    hidden= 32: C_u=0.9751, FLOPs= 322,560,000, I_eff=3.02e-09
+    hidden= 64: C_u=0.9376, FLOPs= 645,120,000, I_eff=1.45e-09
+    hidden=128: C_u=0.9744, FLOPs=1,290,240,000, I_eff=7.55e-10
+  [PASS] H4.2: I_eff decreases with hidden size (same C_u, more FLOPs)
+       Sequence: ['1.22e-08', '6.13e-09', '3.02e-09', '1.45e-09', '7.55e-10']
+
+H4.3: Sample efficiency — bottleneck reaches C_u plateau faster
+    N=  100: C_u(bn)=0.5734, C_u(wide)=0.9901
+    N=  500: C_u(bn)=0.9633, C_u(wide)=0.9974
+    N= 1000: C_u(bn)=0.9759, C_u(wide)=0.9990
+    N= 2000: C_u(bn)=0.9783, C_u(wide)=0.9982
+
+======================================================================
+SECTION 5: ADVERSARIAL STRESS TESTS
+======================================================================
+
+H5.1: Structured noise that mimics z
+  [PASS] H5.1: SNR=0.0, C_u(noisy_copy)=0.0000
+       Correctly captures that correlated noise IS informative
+  [PASS] H5.1: SNR=0.5, C_u(noisy_copy)=0.0276
+       Correctly captures that correlated noise IS informative
+  [PASS] H5.1: SNR=1.0, C_u(noisy_copy)=0.1099
+       Correctly captures that correlated noise IS informative
+  [PASS] H5.1: SNR=2.0, C_u(noisy_copy)=0.3679
+       Correctly captures that correlated noise IS informative
+
+H5.2: Random labels — C_u should be ~0 regardless of model
+  [PASS] H5.2: Random labels, bn=2, C_u=0.0012, acc=0.542
+       Labels uncorrelated with features → no useful structure
+  [PASS] H5.2: Random labels, bn=8, C_u=0.0000, acc=0.597
+       Labels uncorrelated with features → no useful structure
+  [PASS] H5.2: Random labels, bn=32, C_u=0.0000, acc=0.608
+       Labels uncorrelated with features → no useful structure
+
+H5.3: Redundant copies of z — C_u capped at H(Z)
+  [PASS] H5.3: 1 copies of z, C_u=1.0000
+  [PASS] H5.3: 4 copies of z, C_u=1.0000
+  [PASS] H5.3: 16 copies of z, C_u=1.0000
+
+======================================================================
+SECTION 6: FRAMEWORK PREDICTIONS
+======================================================================
+
+H6.1: C_u predicts transfer success
+    bn= 1: C_u=0.8270, acc_train=1.000, acc_transfer=0.810
+    bn= 2: C_u=0.9890, acc_train=1.000, acc_transfer=0.878
+    bn= 4: C_u=0.9799, acc_train=1.000, acc_transfer=0.892
+    bn= 8: C_u=0.9851, acc_train=1.000, acc_transfer=0.912
+    bn=16: C_u=0.9871, acc_train=1.000, acc_transfer=0.877
+  [PASS] H6.1: r(C_u, transfer_acc) = 0.9207, p = 0.0265
+       C_u should predict which architectures transfer well
+
+H6.2: I_eff predicts learning speed
+    hidden=  8: I_eff=3.06e-07, epochs_to_90%=2
+    hidden= 16: I_eff=1.23e-07, epochs_to_90%=2
+    hidden= 32: I_eff=1.10e-07, epochs_to_90%=1
+    hidden= 64: I_eff=2.70e-08, epochs_to_90%=2
+
+======================================================================
+SUMMARY
+======================================================================
+
+Total hypotheses tested: 40
+  PASS: 40
+  FAIL: 0
+  Pass rate: 100.0%
+  Elapsed: 26.5s
+
+Traceback (most recent call last):
+  File "/Users/biobook/Code/fti/hypothesis_battery.py", line 512, in <module>
+    f.write(json.dumps(r) + "\n")
+            ^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniforge/base/lib/python3.12/json/__init__.py", line 231, in dumps
+    return _default_encoder.encode(obj)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniforge/base/lib/python3.12/json/encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniforge/base/lib/python3.12/json/encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Caskroom/miniforge/base/lib/python3.12/json/encoder.py", line 180, in default
+    raise TypeError(f'Object of type {o.__class__.__name__} '
+TypeError: Object of type bool is not JSON serializable
