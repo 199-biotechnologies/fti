@@ -1,4 +1,42 @@
+# Manuscript files (not part of code repository)
+*.typ
+*.pdf
+*.docx
+*.png
+*.bib
+*.dot
+*.tar.gz
+
+# Build artifacts
+build_docx.js
 node_modules/
 package-lock.json
 package.json
-.claude/tsc-cache/
+
+# Submission materials
+cover_letter_*.md
+cover_letter_*.pdf
+graphical_abstract.*
+gpt-pro-final-review*
+entropy-template*
+
+# Review and notes
+revision_notes.md
+research_committee_notes.md
+gemini_critique_response.md
+implications_analysis.md
+
+# Autoresearch
+autoresearch.toml
+program.md
+eval_metric.py
+.autoresearch/
+
+# Output logs
+*.txt
+hypothesis_results.jsonl
+multi_seed_results.json
+multi_seed_output.txt
+
+# Session
+.claude/
