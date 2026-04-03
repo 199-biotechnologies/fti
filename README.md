@@ -16,11 +16,11 @@
 &nbsp;
 [![Python 3.10+](https://img.shields.io/badge/Python-3.10+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://python.org)
 &nbsp;
-[![Paper: Entropy](https://img.shields.io/badge/Paper-Entropy_(MDPI)-4B8BBE?style=for-the-badge)](https://www.mdpi.com/journal/entropy)
+[![Paper: Preprint](https://img.shields.io/badge/Paper-Preprint-4B8BBE?style=for-the-badge)](https://github.com/199-biotechnologies/fti)
 
 ---
 
-Companion code for **"Intelligence as Useful Structure: A Thermodynamic Perspective"** (Djordjevic, 2026). Exact computations, neural network experiments, plus a 121-test validation suite.
+Companion code for **"Intelligence as Useful Structure: A Thermodynamic Perspective"** (Djordjevic, 2026, preprint). Exact computations, neural network experiments, plus a 121-test validation suite.
 
 [The Problem](#the-problem) | [Quick Start](#quick-start) | [What's Inside](#whats-inside) | [Results](#results) | [Citation](#citation)
 
@@ -71,7 +71,7 @@ fti/
 
 | Script | What it does | Runtime |
 |--------|-------------|---------|
-| `compute_cu.py` | Exact $C_u$, $W_\text{diss}$, $I^*_\text{eff}$, $A$ for three toy agents at $T{=}300\text{K}$ | < 1s |
+| `compute_cu.py` | Exact $C_u$, $W_{\text{diss}}$, $I^*_{\text{eff}}$, $A$ for three toy agents at $T{=}300\text{K}$ | < 1s |
 | `neural_experiment.py` | Train bottleneck / wide / noise-only nets, estimate $C_u$ via probes | ~30s |
 | `multi_seed_experiment.py` | Statistical robustness across 10 random seeds | ~5 min |
 
@@ -88,7 +88,7 @@ fti/
 
 Three agents learn from the same binary environment. The rule learner compresses the observation down to just the viability-relevant bit. The lookup table stores everything. The noise memoriser stores the wrong thing.
 
-| Agent | Total stored | Useful ($C_u$) | Dissipation | Efficiency ($I^*_\text{eff}$) | Generalisation ($A$) |
+| Agent | Total stored | Useful ($C_u$) | Dissipation | Efficiency ($I^*_{\text{eff}}$) | Generalisation ($A$) |
 |-------|-------------|----------------|-------------|-------------------------------|----------------------|
 | Rule learner | 1 bit | **1 bit** | 16 $k_BT\ln2$ | **0.0625** | **1.00** |
 | Lookup table | 2 bits | 1 bit | 24 $k_BT\ln2$ | 0.0417 | 0.54 |
@@ -110,19 +110,18 @@ The paper separates intelligence into three independent axes:
 |------|----------|---------|
 | Capability | $A(\pi; \mu)$ | Viability across environments |
 | Structure | $C_u = I(M_t; Z^V_{t+\tau} \mid H_t)$ | Relevance-filtered internal model quality |
-| Efficiency | $I^*_\text{eff} = \frac{k_B \bar{T} \ln 2 \;\Delta C_u}{W_\text{diss}}$ | Useful bits gained per joule |
+| Efficiency | $I^*_{\text{eff}} = k_B \bar{T} \ln 2 \cdot \Delta C_u \;/\; W_{\text{diss}}$ | Useful bits gained per joule |
 
 Builds on the Information Bottleneck (Tishby et al., 1999) and semantic information (Kolchinsky & Wolpert, 2018). What's new is putting these together: a usefulness-filtered structure term, a thermodynamic efficiency term, and a behavioural reach axis — evaluated as a profile, not collapsed into a single number.
 
 ## Citation
 
 ```bibtex
-@article{djordjevic2026intelligence,
+@misc{djordjevic2026intelligence,
   title={Intelligence as Useful Structure: A Thermodynamic Perspective},
   author={Djordjevic, Boris},
-  journal={Entropy},
   year={2026},
-  note={Submitted}
+  note={Preprint}
 }
 ```
 
