@@ -82,7 +82,7 @@ const doc = new Document({
       new Paragraph({
         alignment: AlignmentType.CENTER,
         spacing: { after: 60 },
-        children: [it("Paperfoot AI")]
+        children: [it("199 Biotechnologies (SG) Pte Ltd")]
       }),
       new Paragraph({
         alignment: AlignmentType.CENTER,
@@ -273,7 +273,7 @@ const doc = new Document({
 
       // 9. Boundaries
       h1("9. Boundaries and Limitations"),
-      p("The central claim is conceptual and operational: a thermodynamic definition of intelligence requires a usefulness filter on internal structure."),
+      p("The central claim is conceptual and operational: a thermodynamic definition of intelligence should include a usefulness filter on internal structure."),
       p("Several limits should be stated plainly. First, the measurement problem remains open. Equation (2) is a concrete candidate, not a finished universal estimator. Some domains will require latent-state models; others will need predictive-control proxies. Second, the proposal is not a complete scalar ranking of systems. The relevant object is an intelligence profile: adaptive reach A, useful-structure stock C_u, and acquisition efficiency I_eff. Third, active inference already provides a rich account of viability and attracting states; the present contribution is narrower, namely an explicit efficiency term for the acquisition of relevance-filtered structure. Fourth, the framework does not require explicit symbolic world models. Implicit, embodied, and distributed representations can all count if they carry the right relevance-filtered distinctions."),
       p("The framework succeeds if it makes the target of measurement clearer than existing alternatives and generates discriminating empirical tests."),
 
