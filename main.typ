@@ -251,3 +251,19 @@ If that task succeeds, the field gains more than another bits-per-joule curve. I
     [Collective systems], [Distributed coordination information relevant to shared viability], [Communication and energetic cost], [More resilient coordination without credit for irrelevant internal complexity],
   )
 ) <tab:validation>
+
+= Author contributions
+
+B.D. conceived the framework, conducted the literature review, performed the computations, and wrote the manuscript.
+
+= Funding
+
+This research received no external funding.
+
+= Data availability statement
+
+The computation code used to generate @tab:toy is available at #link("https://github.com/199-biotechnologies/fti")[github.com/199-biotechnologies/fti] (`compute_cu.py`).
+
+= Conflicts of interest
+
+The author is the founder of 199 Biotechnologies (SG) Pte Ltd, which develops AI infrastructure tools. The research was conducted independently and the company had no role in the design or writing of this work.

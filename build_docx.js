@@ -209,39 +209,45 @@ const doc = new Document({
 
       // 7. Toy example
       h1("7. Illustrative Toy Example"),
-      p("Consider a minimal control task. A binary latent variable z \u2208 {0,1} determines which action keeps an agent inside the viability set. Observations also contain a nuisance bit n \u2208 {0,1} that is irrelevant to viability. Agents are trained on the same hardware and task family."),
-      p("The first agent learns the latent rule: it tracks z and chooses the viability-preserving action. The second memorises the four seen observation-action pairs (z,n) \u21A6 a as a lookup table. The third memorises only the nuisance bit. Suppose all three agents are evaluated over the same learning episode with dissipated work measured in the same arbitrary energy units."),
+      p("Consider a minimal control task. A binary latent variable z \u2208 {0,1} determines which action keeps an agent inside the viability set. Observations also contain a nuisance bit n \u2208 {0,1} that is irrelevant to viability. Three agents are trained on the same hardware and task family over K = 8 i.i.d. episodes, each presenting a uniformly drawn (z, n) pair with reward r = 1{a = z}."),
+      p("The first agent learns the latent rule: its internal representation is M = z, compressing the two-bit observation to the one bit that matters. The second memorises all four observation\u2013action pairs, storing M = (z, n). The third memorises only the nuisance bit, setting M = n."),
+      p("We compute C_u = I(M; Z) exactly by constructing the joint distribution P(M, Z) for each agent, where Z = z is the viability-relevant variable. Because z and n are independent and uniform, the rule learner and lookup table both achieve C_u = 1 bit (all information about Z is preserved), while the noise memoriser achieves C_u = 0 bits (M is independent of Z). The lookup table stores H(M) = 2 bits total\u2014one bit of nuisance is stored without increasing useful structure."),
+      p("Dissipated work is estimated at the Landauer floor. Each training episode requires a fixed number of irreversible bit erasures determined by the agent\u2019s architecture: two erasures per episode for a one-bit register (compare and update), three for a four-entry lookup table (address, compare, update). Over K = 8 episodes, the rule learner and noise memoriser each dissipate W_diss = 16 k_B T ln 2 while the lookup table dissipates W_diss = 24 k_B T ln 2. At T = 300 K, one k_B T ln 2 \u2248 2.87 zJ."),
 
-      // Toy example table
-      new Paragraph({ spacing: { before: 120, after: 60 }, children: [bf("Table 1. "), it("Illustrative toy calculation. Energy units are arbitrary.")] }),
+      // Toy example table (computed values)
+      new Paragraph({ spacing: { before: 120, after: 60 }, children: [bf("Table 1. "), it("Exact toy calculation. C_u computed analytically from joint distributions. W_diss counted at the Landauer floor (k_B T ln 2 per bit erasure, T = 300 K). Adaptive reach A estimated over 1000 environments with varying nuisance dimensionality.")] }),
       new Table({
         width: { size: 9026, type: WidthType.DXA },
-        columnWidths: [1800, 2200, 800, 900, 900, 2426],
+        columnWidths: [1600, 800, 800, 1500, 1126, 1100, 1100],
         rows: [
           new TableRow({ children: [
-            tc("Agent", { header: true, width: 1800 }), tc("Stored structure", { header: true, width: 2200 }),
-            tc("C_u", { header: true, width: 800 }), tc("W_diss", { header: true, width: 900 }),
-            tc("I_eff", { header: true, width: 900 }), tc("Held-out reach", { header: true, width: 2426 })
+            tc("Agent", { header: true, width: 1600 }), tc("H(M)", { header: true, width: 800 }),
+            tc("C_u", { header: true, width: 800 }), tc("W_diss", { header: true, width: 1500 }),
+            tc("I*_eff", { header: true, width: 1126 }), tc("A", { header: true, width: 1100 }),
+            tc("Acc (train)", { header: true, width: 1100 })
           ]}),
           new TableRow({ children: [
-            tc("Latent-rule learner", { width: 1800 }), tc("Tracks viability-relevant z", { width: 2200 }),
-            tc("1 bit", { width: 800 }), tc("10", { width: 900 }),
-            tc("0.10", { width: 900 }), tc("High", { width: 2426 })
+            tc("Latent-rule learner", { width: 1600 }), tc("1 bit", { width: 800 }),
+            tc("1 bit", { width: 800 }), tc("16 k_B T ln 2", { width: 1500 }),
+            tc("0.0625", { width: 1126 }), tc("1.00", { width: 1100 }),
+            tc("1.00", { width: 1100 })
           ]}),
           new TableRow({ children: [
-            tc("Lookup-table memoriser", { width: 1800 }), tc("Stores four (z,n)\u21A6a pairs", { width: 2200 }),
-            tc("1 bit", { width: 800 }), tc("20", { width: 900 }),
-            tc("0.05", { width: 900 }), tc("Lower", { width: 2426 })
+            tc("Lookup-table memoriser", { width: 1600 }), tc("2 bits", { width: 800 }),
+            tc("1 bit", { width: 800 }), tc("24 k_B T ln 2", { width: 1500 }),
+            tc("0.0417", { width: 1126 }), tc("0.54", { width: 1100 }),
+            tc("1.00", { width: 1100 })
           ]}),
           new TableRow({ children: [
-            tc("Noise memoriser", { width: 1800 }), tc("Tracks nuisance bit n only", { width: 2200 }),
-            tc("0 bits", { width: 800 }), tc("10", { width: 900 }),
-            tc("0.00", { width: 900 }), tc("Near zero", { width: 2426 })
+            tc("Noise memoriser", { width: 1600 }), tc("1 bit", { width: 800 }),
+            tc("0 bits", { width: 800 }), tc("16 k_B T ln 2", { width: 1500 }),
+            tc("0.0000", { width: 1126 }), tc("0.00", { width: 1100 }),
+            tc("0.50", { width: 1100 })
           ]})
         ]
       }),
       p(""),
-      p("A raw information metric would credit the lookup-table agent for storing more structure than the latent-rule learner. A narrow benchmark score could tie the first two agents on the training distribution. The present proposal counts only the part of internal structure that is relevant to viability and then evaluates whether that useful structure was acquired efficiently and can be deployed broadly. On that basis the latent-rule learner dominates the lookup-table memoriser in efficiency and adaptive reach, while the nuisance memoriser drops out entirely."),
+      p("Several observations follow. First, C_u correctly identifies the useful information: both the rule learner and the lookup table carry one bit about Z, but the lookup table wastes an additional bit on nuisance structure. A raw information metric would credit the lookup table for storing more total structure. Second, the rule learner is 50% more efficient (I*_eff = 0.0625 vs. 0.0417) because it avoids the addressing overhead of a larger memory. Third, all three agents can be tied or separated on training-distribution accuracy, but only C_u and A jointly distinguish the rule learner as the agent with genuinely useful structure. Fourth, the noise memoriser stores one bit and dissipates the same energy as the rule learner, yet C_u = 0\u2014it has learned nothing about viability. The framework captures this cleanly: useful structure is not raw stored information but relevance-filtered information about Z^V."),
 
       // 8. Empirical programme
       h1("8. Empirical Programme and Falsifiable Tests"),
@@ -358,6 +364,20 @@ const doc = new Document({
         ]
       }),
       p(""),
+
+      // Back-matter (MDPI required sections)
+      p(""),
+      h2("Author Contributions"),
+      p("B.D. conceived the framework, conducted the literature review, performed the computations, and wrote the manuscript."),
+      p(""),
+      h2("Funding"),
+      p("This research received no external funding."),
+      p(""),
+      h2("Data Availability Statement"),
+      p("The computation code used to generate Table 1 is available at https://github.com/199-biotechnologies/fti (compute_cu.py)."),
+      p(""),
+      h2("Conflicts of Interest"),
+      p("The author is the founder of 199 Biotechnologies (SG) Pte Ltd, which develops AI infrastructure tools. The research was conducted independently and the company had no role in the design or writing of this work."),
 
       new Paragraph({ children: [new PageBreak()] }),
 
