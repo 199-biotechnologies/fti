@@ -1,0 +1,37 @@
+======================================================================
+MULTI-SEED EXPERIMENT (10 seeds)
+======================================================================
+
+Seed 0: done
+Seed 1: done
+Seed 2: done
+Seed 3: done
+Seed 4: done
+Seed 5: done
+Seed 6: done
+Seed 7: done
+Seed 8: done
+Seed 9: done
+
+======================================================================
+RESULTS (mean ± std over 10 seeds)
+======================================================================
+
+Agent                      C_u             I*_eff        Acc(ID)       Acc(OOD)              A
+───────────────────────────────────────────────────────────────────────────────────────────────
+Bottleneck      0.9573±0.0189 8.90e-09±1.76e-10  0.999±0.001  0.992±0.009  0.996±0.009
+Wide            0.9992±0.0003 2.20e-10±6.19e-14  1.000±0.001  0.973±0.018  0.962±0.056
+Noise-only      0.0030±0.0046 3.90e-11±6.00e-11  0.502±0.024  0.505±0.020  0.000±0.000
+
+STATISTICAL TESTS (two-sample t-test on I*_eff):
+  Bottleneck vs Wide:  t=148.26, p=3.05e-29
+  Bottleneck vs Noise: t=143.23, p=5.67e-29
+
+CORRELATION WITH ADAPTIVE REACH:
+  Pearson r(C_u, A) = 0.9978
+  Pearson r(params, A) = 0.4793
+  C_u predicts A better than param count
+
+Cohen's d (C_u: Bottleneck vs Noise): 69.40
+
+Raw results saved to multi_seed_results.json
